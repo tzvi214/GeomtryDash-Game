@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject/Object.h"
 #include <iostream>
+#include "Information.h"
 
 class MovingObject : public Object
 {
@@ -10,7 +11,7 @@ public:
 	virtual bool isDead() const { return m_dead; }
 	virtual void updateDirection() {};
 	void printing() { std::cout << "\n MovingObject\n"; };
-	// void updateInformation(Info&)
+	virtual void updateInformation(Information&) {};
 protected:
 	bool m_dead = false;
 private:
