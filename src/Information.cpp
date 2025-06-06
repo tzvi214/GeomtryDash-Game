@@ -1,5 +1,9 @@
 #include "Information.h"
+#include <iostream>
+Information::Information()
+{ std::cout <<"\nin Information C-tor\n"; }
 
-Information::Information(int n)
-	:m{ n } {
+void Information::draw(sf::RenderWindow& window)
+{
+	//...
 }

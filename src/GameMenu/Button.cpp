@@ -1,9 +1,15 @@
-#include "GameMenu/Button.h"
+﻿#include "GameMenu/Button.h"
 
 Button::Button(const TypeButton& type, const sf::Vector2f& location, const sf::Vector2f& wantedSize)
-	:m_type(type), m_location(location), m_pressed(false)
+	:m_type(type), m_location(location)
 {
 	updateSpritesForAll(wantedSize);
+}
+
+bool Button::isPressed(const sf::Vector2f& mousePos) const
+{
+	return mousePos.x >= m_location.x && mousePos.x <= m_location.x + ButtonData::SIZE_BUTTON.x &&
+		mousePos.y >= m_location.y && mousePos.y <= m_location.y + ButtonData::SIZE_BUTTON.y;
 }
 
 
@@ -36,5 +42,6 @@ void Button::updateSpritesForAll(const sf::Vector2f& wantedSize)
 
 void Button::draw(sf::RenderWindow& window)
 {
+	m_sprite.setPosition(m_location); // עדכון מיקום התמונה
 	window.draw(m_sprite);
 }

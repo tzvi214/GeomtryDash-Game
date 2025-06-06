@@ -1,10 +1,120 @@
 #include "GameController.h"
+#include <iostream>
 
 GameController::GameController()
+	: m_window(sf::VideoMode(400, 400), "Geometry Dash"), m_menuManager(m_window) 
 {
-	
 }
+//-------------------------------------
 void GameController::run()
 {
+	/*while (m_window.isOpen()) {
 
+		sf::Event event;
+		while (m_window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				m_window.close();
+				return;
+			}
+			m_menuManager.showMenu(event);
+			handleMenu();
+			mainLoop();
+			updateAfterLevel();
+		}
+
+	}*/
+	while (!m_need2exit) {
+
+		    sf::Event event;
+			m_menuManager.showMenu(event);
+			handleMenu();
+			updateAfterLevel();	
+	}
+	// i think its need to be like this ^
+
+}
+//-------------------------------------
+void GameController::mainLoop()
+{
+	m_clock.restart();// not to get a lot of time itch time that the function called
+	while (m_window.isOpen()) {
+
+		sf::Event event;
+		while (m_window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				m_window.close();
+				m_need2exit = true;
+				return;
+			}
+		}
+		handleEvent();
+		handleCollisionController();
+		draw();
+
+	}
+}
+//-------------------------------------
+void GameController::handleEvent()
+{
+	deleteObjFromVec();
+	// maybe move is separate function and update direction is a separate function
+	for (const auto& MovObj : m_movingObjVec)
+		MovObj->updateDirection();
+
+	auto deltaTime = m_clock.restart().asSeconds();
+	for (const auto& MovObj : m_movingObjVec)
+		MovObj->move(deltaTime);
+
+}
+//-------------------------------------
+void GameController::deleteObjFromVec()
+{
+	std::erase_if(m_movingObjVec, [](const auto& obj) { return obj->isDead(); });
+	//std::erase_if(m_staticObjVec, [](const auto& obj) { return obj->isDead(); });// maybe in i will be able to shot static object and to kill them
+}
+//-------------------------------------
+void GameController::draw()
+{
+	m_window.clear();
+	for (const auto& staticObj : m_staticObjVec)
+		staticObj->draw(m_window);
+	for (const auto& movingObj : m_movingObjVec)
+		movingObj->draw(m_window);
+
+	m_information.draw(m_window);
+	m_window.display();
+}
+//-------------------------------------
+void GameController::handleCollisionController()
+{
+
+
+}
+//-------------------------------------
+void GameController::handleMenu()
+{
+	if (m_menuManager.handleStart())
+	{
+		analyzeLevel();
+		mainLoop();
+	}
+	else if (m_menuManager.handleExit())
+	{
+		m_need2exit = true;
+		//m_window.close();
+	}
+}
+//-------------------------------------
+void GameController::analyzeLevel()
+{
+	// anlayze ...
+	
+}
+//-------------------------------------
+void GameController::updateInformation()
+{
+}
+//-------------------------------------
+void GameController::updateAfterLevel()
+{
 }

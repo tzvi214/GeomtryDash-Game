@@ -1,14 +1,11 @@
-#include "GameObject/StaticObject/StaticObject.h"
-#include <SFML/Graphics.hpp>
-#include "GameObject/Images/TypeObject.h"
-#include "Information.h"
+#include "GameController.h"
+#include "GameMenu/FontHolder.h"
+#include "GameMenu/ImagesButtons.h"
 int main()
 {
-	sf::Sprite sprite;
-	sf::Vector2f loc;
-	TypeObject type = TypeObject::player;
-	StaticObject staticObj(loc, sprite, type);
-	staticObj.p();
-	Information(7);
+	ImagesButton::loadAllTextures(); // תעינת תמונות מל תפריט
+	FontHolder::loadFont();
+
+	GameController gameController;
+	gameController.run();
 }
-	
