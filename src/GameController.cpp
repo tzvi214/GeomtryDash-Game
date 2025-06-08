@@ -1,8 +1,9 @@
 #include "GameController.h"
 #include <iostream>
+#include "GameObject/MovingObject/Player.h"
 
 GameController::GameController()
-	: m_window(sf::VideoMode(400, 400), "Geometry Dash"), m_menuManager(m_window) 
+	: m_window(sf::VideoMode(800, 900), "Geometry Dash"), m_menuManager(m_window) 
 {
 }
 //-------------------------------------
@@ -26,7 +27,7 @@ void GameController::run()
 	while (!m_need2exit) {
 
 		    sf::Event event;
-			m_menuManager.showMenu(event);
+			m_menuManager.runMenu(event);
 			handleMenu();
 			updateAfterLevel();	
 	}
@@ -42,8 +43,8 @@ void GameController::mainLoop()
 		sf::Event event;
 		while (m_window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
-				m_window.close();
-				m_need2exit = true;
+				/*m_window.close();
+				m_need2exit = true;*/
 				return;
 			}
 		}
@@ -108,7 +109,22 @@ void GameController::handleMenu()
 void GameController::analyzeLevel()
 {
 	// anlayze ...
+	sf::Texture avater;
 	
+	
+  // Analyze level...  
+       sf::Texture avatar;  
+       if (!avatar.loadFromFile("Avatar.png")) {  
+           std::cerr << "Error: Failed to load Avatar.png" << std::endl;  
+           return;  
+       }  
+	   sf::Sprite avaterSprite;
+	   avaterSprite.setTexture(avatar);
+
+	   sf::Vector2f loc{ 0.f, 0.f };
+	   TypeObject playerType = TypeObject::player;
+
+	   m_movingObjVec.push_back(std::make_unique<Player>(loc, avaterSprite, playerType));
 }
 //-------------------------------------
 void GameController::updateInformation()
@@ -117,4 +133,6 @@ void GameController::updateInformation()
 //-------------------------------------
 void GameController::updateAfterLevel()
 {
+	m_movingObjVec.clear();
+	m_staticObjVec.clear();
 }

@@ -6,7 +6,7 @@ class Object
 public:
 	Object(sf::Vector2f location, sf::Sprite sprite, TypeObject type);
 	virtual ~Object() = default;
-	virtual void draw(sf::RenderWindow& window) { };
+	virtual void draw(sf::RenderWindow& window) {m_sprite.setPosition(m_location) ; window.draw(m_sprite); };
 
 protected:
 

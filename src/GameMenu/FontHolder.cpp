@@ -12,7 +12,7 @@ sf::Text FontHolder::getText()
 {
 	sf::Text text;
 	text.setFont(m_font);
-	text.setCharacterSize(50); // גודל הכתב
+	text.setCharacterSize(30); // גודל הכתב
 	return text;
 }
 
