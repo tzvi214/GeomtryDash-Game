@@ -9,7 +9,7 @@ public:
 	void print() { std::cout << "\n Player \n"; }
 	virtual void move(float) override;
 private:
-	int m_speed = 100;
+	int m_speed = 150;
 	int m_life = 5;
 	sf::Vector2f m_firstLoc;
 

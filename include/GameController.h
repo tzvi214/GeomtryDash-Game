@@ -28,8 +28,11 @@ private:
 	void draw();
 	void handleCollisionController();
 	void updateInformation();
+
 	//void clearAllVec(); //m_movingObjVec.clear(); m_staticObjVec.clear();
 	void updateAfterLevel();
+
+	void readFromFile();
 	//--- data member ----
 	std::vector <std::unique_ptr<MovingObject>> m_movingObjVec;
 	std::vector <std::unique_ptr<StaticObject>> m_staticObjVec;
@@ -39,4 +42,5 @@ private:
 	MenuManager m_menuManager;
 	bool m_need2exit = false;// in class states
 	sf::Clock m_clock;
+
 };
