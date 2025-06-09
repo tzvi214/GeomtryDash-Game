@@ -16,7 +16,7 @@ public:
     void draw(sf::RenderWindow& window);
 
 protected:
-    TypeButton m_type;
+    TypeButton m_type;//whay??
     sf::Sprite m_sprite;
     sf::Vector2f m_location;
 

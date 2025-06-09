@@ -9,5 +9,5 @@ public:
 	void handleClick(State& state, sf::RenderWindow& window, sf::Event& event) override;
 
 private:
-	std::string m_url; // קישור לסרטון
+	std::string m_url; // link to the video
 };

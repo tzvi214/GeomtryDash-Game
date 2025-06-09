@@ -3,7 +3,7 @@
 
 GitHubLink::GitHubLink(const sf::Vector2f& location, const sf::Vector2f& wantedSize)
 	:Button(TypeButton::GitHub, location, wantedSize),
-	m_url("https://github.com/aharonshamsi") // קישור  של סירטון של המחשק
+	m_url("https://github.com/tzvi214/GeomtryDash-Game") 
 {}
 
 void GitHubLink::handleClick(State & state, sf::RenderWindow & window, sf::Event & event)
