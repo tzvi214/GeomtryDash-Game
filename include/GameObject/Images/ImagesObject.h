@@ -3,8 +3,7 @@
 #include "GameObject/Images/TypeObject.h"
 #include "vector"
 
-//
-//
+
 //class ImagesObject {
 //public:
 //
@@ -19,7 +18,6 @@
 //	//static void loadStupidEnemy();
 //
 //};
-//
 
 
 

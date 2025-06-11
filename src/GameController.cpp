@@ -164,7 +164,7 @@ void GameController::analyzeLevel()
 			col = 0;
 		}
 	}
-
+	  
 	file.close();
 
 
