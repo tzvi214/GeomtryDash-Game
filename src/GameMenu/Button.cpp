@@ -1,6 +1,6 @@
 ﻿#include "GameMenu/Button.h"
 
-Button::Button(const TypeButton& type, const sf::Vector2f& location, const sf::Vector2f& wantedSize)
+Button::Button(const GameObjectType& type, const sf::Vector2f& location, const sf::Vector2f& wantedSize)
 	:m_type(type), m_location(location)
 {
 	updateSpritesForAll(wantedSize);
@@ -8,8 +8,6 @@ Button::Button(const TypeButton& type, const sf::Vector2f& location, const sf::V
 
 bool Button::isPressed(const sf::Vector2f& mousePos) const
 {
-	/*return mousePos.x >= m_location.x && mousePos.x <= m_location.x + ButtonData::SIZE_BUTTON.x &&
-		mousePos.y >= m_location.y && mousePos.y <= m_location.y + ButtonData::SIZE_BUTTON.y;*/
 	return m_sprite.getGlobalBounds().contains(mousePos);
 }
 
@@ -19,28 +17,36 @@ void Button::updateSpritesForAll(const sf::Vector2f& wantedSize)
 {
 	switch (m_type)
 	{
-	case TypeButton::Start:
-		m_sprite = ImagesButton::getSpinte(TypeButton::Start, wantedSize);
+	case GameObjectType::Start:
+		m_sprite = ImageMenu::getSpinte(GameObjectType::Start, wantedSize);
 		break;
 
-	case TypeButton::Store:
-		m_sprite = ImagesButton::getSpinte(TypeButton::Store, wantedSize);
+	case GameObjectType::Store:
+		m_sprite = ImageMenu::getSpinte(GameObjectType::Store, wantedSize);
 		break;
 
-	case TypeButton::Help:
-		m_sprite = ImagesButton::getSpinte(TypeButton::Help, wantedSize);
+	case GameObjectType::Help:
+		m_sprite = ImageMenu::getSpinte(GameObjectType::Help, wantedSize);
 		break;
 
-	case TypeButton::Exit:
-		m_sprite = ImagesButton::getSpinte(TypeButton::Exit, wantedSize);
+	case GameObjectType::Exit:
+		m_sprite = ImageMenu::getSpinte(GameObjectType::Exit, wantedSize);
 		break;
 
-	case TypeButton::Watch:
-		m_sprite = ImagesButton::getSpinte(TypeButton::Watch, wantedSize);
+	case GameObjectType::Watch:
+		m_sprite = ImageMenu::getSpinte(GameObjectType::Watch, wantedSize);
 		break;
 
-	case TypeButton::GitHub:
-		m_sprite = ImagesButton::getSpinte(TypeButton::GitHub, wantedSize);
+	case GameObjectType::GitHub:
+		m_sprite = ImageMenu::getSpinte(GameObjectType::GitHub, wantedSize);
+		break;
+
+	case GameObjectType::Done:
+		m_sprite = ImageMenu::getSpinte(GameObjectType::Done, wantedSize);
+		break;
+
+	case GameObjectType::Cancel:
+		m_sprite = ImageMenu::getSpinte(GameObjectType::Cancel, wantedSize);
 		break;
 
 	default:

@@ -1,12 +1,12 @@
 #pragma once
-#include "GameMenu/TypeButton.h"
+#include "GameObjectType.h"
 #include "iostream"
 #include <vector>
 
-class ImagesButton {
+class ImageMenu {
 public:
     static void loadAllTextures();
-    static sf::Sprite getSpinte(const TypeButton& type, const sf::Vector2f& wantedSize);
+    static sf::Sprite getSpinte(const GameObjectType& type, const sf::Vector2f& wantedSize);
 
 
 private:
@@ -18,4 +18,10 @@ private:
     static void loadExit();
     static void loadWatch();
     static void loadGitHub();
+    static void loadDone();
+    static void loadCancel();
+
+
+    static void loadplayerOne();
+
 };

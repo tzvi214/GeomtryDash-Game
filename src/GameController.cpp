@@ -6,7 +6,7 @@
 #include "GameObject/StaticObject/Obstacle.h"
 
 GameController::GameController()
-	: m_window(sf::VideoMode(800, 900), "Geometry Dash"), m_menuManager(m_window) 
+	: m_window(sf::VideoMode(800, 900), "Geometry Dash"), m_menuManager() 
 {
 	readFromFile();
 
@@ -33,7 +33,7 @@ void GameController::run()
 
 		    sf::Event event;
 			m_window.setView(sf::View(sf::FloatRect(0.f, 0.f, 800.f, 900.f)));
-			m_menuManager.runMenu(event);
+			m_menuManager.runMenu(m_menuInfo, m_window);
 			m_window.setView(sf::View(sf::FloatRect(0.f, 0.f, 800.f, 900.f)));
 
 			handleMenu();
@@ -109,12 +109,12 @@ void GameController::handleCollisionController()
 //-------------------------------------
 void GameController::handleMenu()
 {
-	if (m_menuManager.handleStart())
+	if (m_menuManager.needToStart())
 	{
 		analyzeLevel();
 		mainLoop();
 	}
-	else if (m_menuManager.handleExit())
+	else if (m_menuManager.needToExit())
 	{
 		m_need2exit = true;
 		//m_window.close();

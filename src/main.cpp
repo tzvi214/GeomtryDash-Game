@@ -1,9 +1,9 @@
 #include "GameController.h"
 #include "GameMenu/FontHolder.h"
-#include "GameMenu/ImagesButtons.h"
+#include "ImageMenu.h"
 int main()
 {
-	ImagesButton::loadAllTextures(); 
+	ImageMenu::loadAllTextures();
 	FontHolder::loadFont();
 
 	GameController gameController;

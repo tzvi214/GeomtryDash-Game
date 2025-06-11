@@ -10,6 +10,8 @@
 #include"GameObject/Images/ImagesObject.h"
 #include "GameMenu/MenuManager.h"
 #include "Information.h"
+#include "GameMenu/MenuInfo.h"
+
 
 
 class GameController
@@ -42,5 +44,5 @@ private:
 	MenuManager m_menuManager;
 	bool m_need2exit = false;// in class states
 	sf::Clock m_clock;
-
+	MenuInfo m_menuInfo;
 };
