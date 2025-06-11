@@ -6,7 +6,7 @@
 class MovingObject : public Object
 {
 public:
-	MovingObject(sf::Vector2f location, sf::Sprite sprite, TypeObject type);
+	MovingObject(sf::Vector2f location, sf::Sprite& sprite, TypeObject type);
 	virtual void move(float) {};
 	virtual bool isDead() const { return m_dead; }
 	virtual void updateDirection() {};

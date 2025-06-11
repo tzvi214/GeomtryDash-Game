@@ -11,5 +11,5 @@ public:
 	//-- get function --
 	int getNumLevel() const {return m_numLevel; }
 private:
-	int m_numLevel = 1;
+	int m_numLevel;
 };

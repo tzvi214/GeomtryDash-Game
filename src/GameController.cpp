@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include "GameObject/MovingObject/Player.h"
+#include "GameObject/MovingObject/Enemy.h"
 
 GameController::GameController()
 	: m_window(sf::VideoMode(800, 900), "Geometry Dash"), m_menuManager(m_window) 
@@ -43,18 +44,63 @@ void GameController::run()
 //-------------------------------------
 void GameController::mainLoop()
 {
-	sf::Texture avatar;
-	if (!avatar.loadFromFile("Avatar.png")) {
-		std::cerr << "Error: Failed to load Avatar.png" << std::endl;
-		return;
-	}
-	sf::Sprite avaterSprite;
-	avaterSprite.setTexture(avatar);
+	//std::fstream file("level" + std::to_string(m_information.getNumLevel()) + ".txt");
+	//if (!file.is_open())
+	//{
+	//	std::cerr << "Error: Failed to open file: Level" << m_information.getNumLevel() << ".txt" << std::endl;
+	//	return;
+	//}
 
-	sf::Vector2f loc{ 400.f, 450.f };
-	TypeObject playerType = TypeObject::player;
+	//// Add logic to read from the file here...
+	//char c;
+	//int row = 0, col = 0;
+	//while (file >> std::noskipws >> c) {
+	//	if (c == '#') {
+	//		std::cout << "#  " << row << "," << col << std::endl;
+	//		sf::Texture avatar;
+	//		if (!avatar.loadFromFile("Avatar.png")) {
+	//			std::cerr << "Error: Failed to load Avatar.png" << std::endl;
+	//			return;
+	//		}
+	//		sf::Sprite avaterSprite;
+	//		avaterSprite.setTexture(avatar);
 
-	m_movingObjVec.push_back(std::make_unique<Player>(loc, avaterSprite, playerType));
+	//		sf::Vector2f loc{ static_cast<float>(col) * 121.f, static_cast<float>(row) * 120.f };
+	//		TypeObject playerType = TypeObject::player;
+
+	//		m_movingObjVec.push_back(std::make_unique<Enemy>(loc, avaterSprite, playerType, 0));
+
+
+	//	}
+	//	else if (c == '@') {
+	//		std::cout << "@  " << row << "," << col << std::endl;
+	//	}
+
+	//	else if (c == 'p') {
+	//		std::cout << "p  " << row << "," << col << std::endl;
+
+	//		sf::Texture avatar;
+	//		if (!avatar.loadFromFile("Avatar.png")) {
+	//			std::cerr << "Error: Failed to load Avatar.png" << std::endl;
+	//			return;
+	//		}
+	//		sf::Sprite avaterSprite;
+	//		avaterSprite.setTexture(avatar);
+
+	//		sf::Vector2f loc{ static_cast<float>(col) * 121.f, static_cast<float>(row) * 120.f };
+	//		TypeObject playerType = TypeObject::player;
+
+	//		m_movingObjVec.push_back(std::make_unique<Player>(loc, avaterSprite, playerType));
+	//	}
+	//	col++;
+	//	if (c == '\n')
+	//	{
+	//		row++;
+	//		col = 0;
+	//	}
+	//}
+
+	//file.close();
 	m_clock.restart();// not to get a lot of time itch time that the function called
 	while (m_window.isOpen()) {
 
@@ -130,22 +176,8 @@ void GameController::handleMenu()
 //-------------------------------------
 void GameController::analyzeLevel()
 {
-	// anlayze ...
-	
-	
-  // Analyze level...  
-       /*sf::Texture avatar;  
-       if (!avatar.loadFromFile("Avatar.png")) {  
-           std::cerr << "Error: Failed to load Avatar.png" << std::endl;  
-           return;  
-       }  
-	   sf::Sprite avaterSprite;
-	   avaterSprite.setTexture(avatar);
 
-	   sf::Vector2f loc{ 400.f, 450.f };
-	   TypeObject playerType = TypeObject::player;
-
-	   m_movingObjVec.push_back(std::make_unique<Player>(loc, avaterSprite, playerType));*/
+	
 }
 //-------------------------------------
 void GameController::updateInformation()
@@ -160,28 +192,5 @@ void GameController::updateAfterLevel()
 
 void GameController::readFromFile()
 {
-   std::fstream file("Level" + std::to_string(m_information.getNumLevel()) + ".txt");
-   if (!file.is_open())
-   {
-       std::cerr << "Error: Failed to open file: Level" << m_information.getNumLevel() << ".txt" << std::endl;
-       return;
-   }
 
-   // Add logic to read from the file here...
-   char c;
-   int row = 0, col=0;
-   while (file >> std::noskipws >> c) {
-	   if (c == '#')
-		   std::cout << "#  " << row << "," << col << std::endl;
-	   else if (c == '@')
-		   std::cout << "@  " << row << "," << col << std::endl;
-	   col++;
-	   if (c == '\n')
-	   {
-		   row++;
-		   col = 0;
-	   }
-   }
-
-   file.close();
 }
