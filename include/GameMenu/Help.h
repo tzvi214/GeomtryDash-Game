@@ -12,6 +12,7 @@ public:
 private:
 	sf::Text m_instructionText; 
 	std::string m_instructions;
+
 	
 	void InitInstructions();
 };
