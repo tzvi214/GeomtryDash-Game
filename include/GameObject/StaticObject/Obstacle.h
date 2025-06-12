@@ -8,5 +8,7 @@ public:
 	virtual ~Obstacle() = default;
 
 	virtual void handleCollision(Object&);
+private:
+	static bool m_registerit;
 
 };

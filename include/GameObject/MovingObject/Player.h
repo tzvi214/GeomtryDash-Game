@@ -1,6 +1,7 @@
 #include "GameObject/MovingObject/MovingObject.h"
 #include "GameObject/Images/ImagesObject.h"
 
+
 class Player : public MovingObject
 {
 public:
@@ -25,4 +26,7 @@ private:
 
 	void moveUpToDirection(float deltaTime);
 	void updateModeDirection();
+
+	static bool m_registerit;
+
 };

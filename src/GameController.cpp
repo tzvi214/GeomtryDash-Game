@@ -4,6 +4,7 @@
 #include "GameObject/MovingObject/Player.h"
 #include "GameObject/MovingObject/Enemy.h"
 #include "GameObject/StaticObject/Obstacle.h"
+#include "GameObject/Factory.h"
 
 GameController::GameController()
 	: m_window(sf::VideoMode(800, 900), "Geometry Dash"), m_menuManager() 
@@ -14,24 +15,9 @@ GameController::GameController()
 //-------------------------------------
 void GameController::run()
 {
-	/*while (m_window.isOpen()) {
-
-		sf::Event event;
-		while (m_window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed) {
-				m_window.close();
-				return;
-			}
-			m_menuManager.showMenu(event);
-			handleMenu();
-			mainLoop();
-			updateAfterLevel();
-		}
-
-	}*/
+	
 	while (!m_need2exit) {
 
-		    sf::Event event;
 			m_window.setView(sf::View(sf::FloatRect(0.f, 0.f, 800.f, 900.f)));
 			m_menuManager.runMenu(m_menuInfo, m_window);
 			m_window.setView(sf::View(sf::FloatRect(0.f, 0.f, 800.f, 900.f)));
@@ -139,7 +125,7 @@ void GameController::analyzeLevel()
 	int row = 0, col = 0;
 	while (file >> std::noskipws >> c) {
 
-		if (c == '#') {
+		/*if (c == '#') {
 			std::cout << "#  " << row << "," << col << std::endl;
 			sf::Vector2f loc{ static_cast<float>(col) * 50.f, static_cast<float>(row) * 50.f };
 			m_staticObjVec.push_back(std::make_unique<Obstacle>(loc, images.getObstacleSprite()));
@@ -156,7 +142,14 @@ void GameController::analyzeLevel()
 
 			sf::Vector2f loc{ static_cast<float>(col) * 50.f, static_cast<float>(row) * 50.f };
 			m_movingObjVec.push_back(std::make_unique<Player>(loc, images.getPlayerSprite()));
-		}
+		}*/
+		sf::Vector2f loc{ static_cast<float>(col) * 50.f, static_cast<float>(row) * 50.f };
+		auto obj = Factory::create(c, loc, images);
+
+		if (auto mo = dynamic_cast<MovingObject*>(obj.get()))
+			m_movingObjVec.push_back(std::unique_ptr<MovingObject>(static_cast<MovingObject*>(obj.release())));
+		else if (auto so = dynamic_cast<StaticObject*>(obj.get()))
+			m_staticObjVec.push_back(std::unique_ptr<StaticObject>(static_cast<StaticObject*>(obj.release())));
 		col++;
 		if (c == '\n')
 		{

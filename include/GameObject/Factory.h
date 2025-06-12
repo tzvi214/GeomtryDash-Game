@@ -18,5 +18,5 @@ public:
     static bool registerIt(char symbol, CreatorFunc func);
 
 private:
-    static std::map<char, CreatorFunc>& getMap();
+    static std::map<char, CreatorFunc>& getMap();//m_map
 };

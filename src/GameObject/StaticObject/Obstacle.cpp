@@ -1,9 +1,14 @@
 #include "GameObject/StaticObject/Obstacle.h"
-
+#include "GameObject/Factory.h"
 Obstacle::Obstacle(sf::Vector2f location, sf::Sprite sprite) :StaticObject(location, sprite)
 {
 	// Additional initialization for Obstacle if needed
 }
+
+bool Obstacle::m_registerit = Factory::registerIt('#',
+	[](sf::Vector2f loc, const ImagesObject& images) -> std::unique_ptr<Object> {
+		return std::make_unique<Obstacle>(loc, images.getObstacleSprite());
+	});
 
 void Obstacle::handleCollision(Object& other)
 {
