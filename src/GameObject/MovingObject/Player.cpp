@@ -67,6 +67,7 @@ void Player::handleCollision(Object& other)
 {
 	other.checkCollision(*this); // = if the other object collides with this player object.	
 }
+
 bool Player::m_registerit = Factory::registerIt('p',
 	[](sf::Vector2f loc, const ImagesObject& images) -> std::unique_ptr<Object> {
 		return std::make_unique<Player>(loc, images.getPlayerSprite());
