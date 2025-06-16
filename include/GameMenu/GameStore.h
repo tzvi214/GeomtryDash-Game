@@ -1,17 +1,17 @@
 #pragma once
 #include "GameObjectType.h"
 #include "Button.h"
-#include "playerOne.h"
 #include "Background.h"
 
 #include "Done.h"
 #include "Cancel.h"
 
-struct CharacterOption
-{
-	std::unique_ptr<Button> button;
-	bool acquired = false;
-};
+#include "PlayerAlpha.h"
+#include "PlayerBeta.h"
+#include "PlayerGamma.h"
+#include "PlayerDelta.h"
+#include "PlayerEpsilon.h"
+#include "PlayerZeta.h"
 
 
 class GameStore {
@@ -19,18 +19,17 @@ class GameStore {
 public:
 	GameStore();
 
-	void runStore(sf::RenderWindow& window, State& state, sf::Event& event);
+	void runStore(Info& info, sf::RenderWindow& window);
 
 private:
 
-	std::vector<CharacterOption> m_character;
-	Background m_backgroundStore;
-
 	std::vector<std::unique_ptr<Button>> m_buttonStore;
+	std::vector<std::pair<std::unique_ptr<Button>, bool>> m_character;
+
+	Background m_backgroundStore;
+	bool m_runStore;
 
 	void drawStore(sf::RenderWindow& window);
-	void clickManagerChar(sf::RenderWindow& window, State& state, sf::Event& event);
-	void clickManagerButton(sf::Vector2f& mousePos, State& state, sf::RenderWindow& window, sf::Event& event);
-	void handleButtonClick(sf::RenderWindow& window, sf::Vector2f& mousePos ,sf::Event & event, State& state);
-
+	void clickManager(Info& info, sf::RenderWindow& window);
+	void loadAllObjects();
 };

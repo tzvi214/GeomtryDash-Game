@@ -3,16 +3,14 @@
 
 
 Watch::Watch(const sf::Vector2f& location, const sf::Vector2f& wantedSize)
-	:Button(GameObjectType::Watch, location, wantedSize),
-	m_url("https://www.youtube.com/watch?v=YOUR_VIDEO_ID") // קישור  של סירטון של המחשק
-{}
-
-void Watch::handleClick(State & state, sf::RenderWindow & window, sf::Event & event)
+	:Button(location),
+	m_url("https://www.youtube.com/watch?v=YOUR_VIDEO_ID")
 {
-	state.setWatch(true);
+	m_sprite = ImageMenu::getSpinte(GameObjectType::Watch, wantedSize);
+}
 
-	//std::string command = "start " + m_url; // Windows
-	//system(command.c_str()); 
-
-	ShellExecuteA(nullptr, "open", m_url.c_str(), nullptr, nullptr, SW_SHOWNORMAL); // פקודת מערכת לפתיחת הסירטון
+MenuAction Watch::handleClick(Info& info, sf::RenderWindow& window)
+{
+	ShellExecuteA(nullptr, "open", m_url.c_str(), nullptr, nullptr, SW_SHOWNORMAL); // Open link
+	return MenuAction::None;
 }

@@ -1,9 +1,16 @@
 #include "GameObject/MovingObject/Player.h"
 #include "nameSpace/MovingData.h"
 #include "GameObject/Factory.h"
+#include "GameObject/Images/TypeObject.h"
+
 
 Player::Player(sf::Vector2f location, sf::Sprite sprite)
 	: MovingObject(location, sprite) {}
+
+bool Player::m_registerit = Factory::registerIt('p',
+	[](sf::Vector2f loc, const ImagesObject& images) -> std::unique_ptr<Object> {
+		return std::make_unique<Player>(loc, images.getSpriteObject(TypeObject::Enemy));
+	});
 
 void Player::startJump()
 {
@@ -68,10 +75,7 @@ void Player::handleCollision(Object& other)
 	other.checkCollision(*this); // = if the other object collides with this player object.	
 }
 
-bool Player::m_registerit = Factory::registerIt('p',
-	[](sf::Vector2f loc, const ImagesObject& images) -> std::unique_ptr<Object> {
-		return std::make_unique<Player>(loc, images.getPlayerSprite());
-	});
+
 //
 //void Player::handleCollision(Enemy&)
 //{

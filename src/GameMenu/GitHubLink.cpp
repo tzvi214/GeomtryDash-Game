@@ -2,16 +2,14 @@
 #include <windows.h>
 
 GitHubLink::GitHubLink(const sf::Vector2f& location, const sf::Vector2f& wantedSize)
-	:Button(GameObjectType::GitHub, location, wantedSize),
-	m_url("https://github.com/aharonshamsi") // קישור  של סירטון של המחשק
-{}
-
-void GitHubLink::handleClick(State & state, sf::RenderWindow & window, sf::Event & event)
+	:Button(location),
+	m_url("https://github.com/aharonshamsi")
 {
-	state.setGitHub(true);
+	m_sprite = ImageMenu::getSpinte(GameObjectType::GitHub, wantedSize);
+}
 
-	//std::string command = "start " + m_url; // Windows
-	//system(command.c_str()); 
-
-	ShellExecuteA(nullptr, "open", m_url.c_str(), nullptr, nullptr, SW_SHOWNORMAL); // פקודת מערכת לפתיחת הקישור
+MenuAction GitHubLink::handleClick(Info& info, sf::RenderWindow& window)
+{
+	ShellExecuteA(nullptr, "open", m_url.c_str(), nullptr, nullptr, SW_SHOWNORMAL);
+	return MenuAction::None;
 }

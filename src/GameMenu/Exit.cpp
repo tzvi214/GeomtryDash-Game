@@ -1,11 +1,13 @@
 #include "GameMenu/Exit.h"
 
 Exit::Exit(const sf::Vector2f& location, const sf::Vector2f& wantedSize)
-	:Button(GameObjectType::Exit, location, wantedSize)
-{}
-
-void Exit::handleClick(State & state, sf::RenderWindow& window, sf::Event& event)
+	:Button(location)
 {
-	state.setExit(true);
+	m_sprite = ImageMenu::getSpinte(GameObjectType::Exit, wantedSize);
+}
+
+MenuAction Exit::handleClick(Info& info, sf::RenderWindow& window)
+{
+	return MenuAction::ExitGame;
 }
 

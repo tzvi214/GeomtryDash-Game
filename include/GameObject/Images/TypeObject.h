@@ -3,8 +3,18 @@
 
 enum class TypeObject {
 	
+	SpriteSheet,
+	Enemy,
+	Obstacle,
 	player,
-	SmartEnemy,
-	StupidEnemy,
+	PlayerCharacters,
+
+	PlayeraAlpha,
+	PlayeraBeta,
+	PlayerGamma,
+	PlayerDelta,
+	PlayerEpsilon,
+	PlayerZeta,
+
 	count
 };

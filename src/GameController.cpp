@@ -5,10 +5,12 @@
 #include "GameObject/MovingObject/Enemy.h"
 #include "GameObject/StaticObject/Obstacle.h"
 #include "GameObject/Factory.h"
+#include "GameMenu/MenuAction.h"
 
 GameController::GameController()
 	: m_window(sf::VideoMode(800, 900), "Geometry Dash"), m_menuManager() 
 {
+
 	readFromFile();
 
 }
@@ -95,12 +97,14 @@ void GameController::handleCollisionController()
 //-------------------------------------
 void GameController::handleMenu()
 {
-	if (m_menuManager.needToStart())
+
+	MenuAction action = m_menuManager.runMenu(m_menuInfo, m_window);
+	if (action == MenuAction::StartLevel )
 	{
 		analyzeLevel();
 		mainLoop();
 	}
-	else if (m_menuManager.needToExit())
+	else if (action == MenuAction::ExitGame)
 	{
 		m_need2exit = true;
 		//m_window.close();
@@ -143,7 +147,8 @@ void GameController::analyzeLevel()
 			sf::Vector2f loc{ static_cast<float>(col) * 50.f, static_cast<float>(row) * 50.f };
 			m_movingObjVec.push_back(std::make_unique<Player>(loc, images.getPlayerSprite()));
 		}*/
-		sf::Vector2f loc{ static_cast<float>(col) * 50.f, static_cast<float>(row) * 50.f };
+		sf::Vector2f loc{ static_cast<float>(col) * 26.f, static_cast<float>(row) * 98.f
+		};
 		auto obj = Factory::create(c, loc, images);
 
 		if (auto mo = dynamic_cast<MovingObject*>(obj.get()))
