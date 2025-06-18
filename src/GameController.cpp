@@ -6,13 +6,14 @@
 #include "GameObject/StaticObject/Obstacle.h"
 #include "GameObject/Factory.h"
 #include "GameMenu/MenuAction.h"
+#include "GameData.h"
+
 
 GameController::GameController()
-	: m_window(sf::VideoMode(800, 900), "Geometry Dash"), m_menuManager() 
+	: m_window(sf::VideoMode((unsigned int) GameData::SIZE_GAME_WINDOW.x, (unsigned int)GameData::SIZE_GAME_WINDOW.y), "Geometry Dash"), m_menuManager(), m_background{ "bg.png" }
 {
 
 	readFromFile();
-
 }
 //-------------------------------------
 void GameController::run()
@@ -20,21 +21,18 @@ void GameController::run()
 	
 	while (!m_need2exit) {
 
-			m_window.setView(sf::View(sf::FloatRect(0.f, 0.f, 800.f, 900.f)));
+			m_window.setView(sf::View(sf::FloatRect(0.f, 0.f, GameData::SIZE_GAME_WINDOW.x, GameData::SIZE_GAME_WINDOW.y)));
 			m_menuManager.runMenu(m_menuInfo, m_window);
-			m_window.setView(sf::View(sf::FloatRect(0.f, 0.f, 800.f, 900.f)));
+			m_window.setView(sf::View(sf::FloatRect(0.f, 0.f, GameData::SIZE_GAME_WINDOW.x, GameData::SIZE_GAME_WINDOW.y)));
 
 			handleMenu();
 			updateAfterLevel();	
 	}
-	// i think its need to be like this ^
 
 }
 //-------------------------------------
 void GameController::mainLoop()
 {
-
-
 
 	m_clock.restart();// not to get a lot of time itch time that the function called
 	while (m_window.isOpen()) {
@@ -80,6 +78,7 @@ void GameController::deleteObjFromVec()
 void GameController::draw()
 {
 	m_window.clear();
+	m_background.draw(m_window);
 	for (const auto& staticObj : m_staticObjVec)
 		staticObj->draw(m_window);
 	for (const auto& movingObj : m_movingObjVec)
@@ -97,6 +96,7 @@ void GameController::handleCollisionController()
 //-------------------------------------
 void GameController::handleMenu()
 {
+	ImagesObject images;
 
 	MenuAction action = m_menuManager.runMenu(m_menuInfo, m_window);
 	if (action == MenuAction::StartLevel )
@@ -129,27 +129,11 @@ void GameController::analyzeLevel()
 	int row = 0, col = 0;
 	while (file >> std::noskipws >> c) {
 
-		/*if (c == '#') {
-			std::cout << "#  " << row << "," << col << std::endl;
-			sf::Vector2f loc{ static_cast<float>(col) * 50.f, static_cast<float>(row) * 50.f };
-			m_staticObjVec.push_back(std::make_unique<Obstacle>(loc, images.getObstacleSprite()));
-
-		}
-		else if (c == '@') {
-			std::cout << "@  " << row << "," << col << std::endl;
-			sf::Vector2f loc{ static_cast<float>(col) * 50.f, static_cast<float>(row) * 50.f };
-			m_movingObjVec.push_back(std::make_unique<Enemy>(loc, images.getEnemySprite()));
-		}
-
-		else if (c == 'p') {
-			std::cout << "p  " << row << "," << col << std::endl;
-
-			sf::Vector2f loc{ static_cast<float>(col) * 50.f, static_cast<float>(row) * 50.f };
-			m_movingObjVec.push_back(std::make_unique<Player>(loc, images.getPlayerSprite()));
-		}*/
-		sf::Vector2f loc{ static_cast<float>(col) * 26.f, static_cast<float>(row) * 98.f
+		sf::Vector2f loc{ static_cast<float>(col) * 50.f, static_cast<float>(row) * 50.f
 		};
-		auto obj = Factory::create(c, loc, images);
+		ObjectConfig objectConfig{loc, images,m_menuInfo.getTypePlayer() };
+
+		auto obj = Factory::create(c, objectConfig);
 
 		if (auto mo = dynamic_cast<MovingObject*>(obj.get()))
 			m_movingObjVec.push_back(std::unique_ptr<MovingObject>(static_cast<MovingObject*>(obj.release())));

@@ -8,8 +8,8 @@ Player::Player(sf::Vector2f location, sf::Sprite sprite)
 	: MovingObject(location, sprite) {}
 
 bool Player::m_registerit = Factory::registerIt('p',
-	[](sf::Vector2f loc, const ImagesObject& images) -> std::unique_ptr<Object> {
-		return std::make_unique<Player>(loc, images.getSpriteObject(TypeObject::Enemy));
+	[](const ObjectConfig& objectConfig) -> std::unique_ptr<Object> {
+		return std::make_unique<Player>(objectConfig.location, objectConfig.images.getSpritePlayer(objectConfig.playerType) /*images.getSpritePlayer(type)*/);
 	});
 
 void Player::startJump()

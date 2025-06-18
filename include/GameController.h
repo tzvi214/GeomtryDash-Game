@@ -10,8 +10,8 @@
 #include"GameObject/Images/ImagesObject.h"
 #include "GameMenu/MenuManager.h"
 #include "Information.h"
-//#include "GameMenu/MenuInfo.h"
 #include "Info.h"
+#include "GameMenu/Background.h"
 
 
 
@@ -46,4 +46,5 @@ private:
 	bool m_need2exit = false;// in class states
 	sf::Clock m_clock;
 	Info m_menuInfo;
+	Background m_background;
 };

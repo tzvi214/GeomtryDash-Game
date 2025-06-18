@@ -7,8 +7,8 @@ Enemy::Enemy(sf::Vector2f location, sf::Sprite sprite)
 	: MovingObject(location, sprite) {
 }
 bool Enemy::m_registerit = Factory::registerIt('@',
-	[](sf::Vector2f loc, const ImagesObject& images) -> std::unique_ptr<Object> {
-		return std::make_unique<Enemy>(loc, images.getSpriteObject(TypeObject::PlayeraAlpha));
+	[](const ObjectConfig& objectConfig) -> std::unique_ptr<Object> {
+		return std::make_unique<Enemy>(objectConfig.location,objectConfig.images.getSpriteObject(TypeObject::Enemy));
 	});
 
 void Enemy::move(float deltaTime)

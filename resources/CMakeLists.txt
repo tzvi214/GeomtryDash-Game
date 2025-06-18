@@ -12,6 +12,7 @@ configure_file ("GeometryDashSpriteSheet.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Athelas.ttc" ${CMAKE_BINARY_DIR} COPYONLY)
 
 configure_file ("Avatar.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("bg.png" ${CMAKE_BINARY_DIR} COPYONLY)
 
 configure_file ("level1.txt" ${CMAKE_BINARY_DIR} COPYONLY)
 

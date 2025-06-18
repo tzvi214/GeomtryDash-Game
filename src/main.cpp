@@ -4,9 +4,11 @@
 #include "GameObject/Images/ImagesObject.h"
 int main()
 {
-	ImagesObject::loadAllImagesObject;
+
 	ImageMenu::loadAllTextures();
 	FontHolder::loadFont();
+
+	ImagesObject::loadAllImagesObject;
 
 	GameController gameController;
 	gameController.run();

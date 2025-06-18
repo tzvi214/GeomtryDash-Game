@@ -11,9 +11,9 @@ bool Factory::registerIt(char symbol, CreatorFunc func) {
     return true;
 }
 
-std::unique_ptr<Object> Factory::create(char symbol, sf::Vector2f location, const ImagesObject& images) {
+std::unique_ptr<Object> Factory::create(char symbol, const ObjectConfig& objectConfig) {
     auto it = getMap().find(symbol);
     if (it != getMap().end())
-        return it->second(location, images);
+        return it->second(objectConfig);
     return nullptr;
 }
