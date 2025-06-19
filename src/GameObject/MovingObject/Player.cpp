@@ -1,15 +1,17 @@
 #include "GameObject/MovingObject/Player.h"
-#include "nameSpace/MovingData.h"
-#include "GameObject/Factory.h"
-#include "GameObject/Images/TypeObject.h"
+#include "GameObject/StaticObject/StaticObject.h"
+#include "GameObject/Factory.h" // for Factory class
 
+Player::Player(sf::Vector2f location, sf::Sprite sprite): MovingObject(location, sprite) {}
 
-Player::Player(sf::Vector2f location, sf::Sprite sprite)
-	: MovingObject(location, sprite) {}
+//bool Player::m_registerIt = Factory::registerIt(CHAR::PLAYER,
+//	[](sf::Vector2f loc, const ImagesObject& images) -> std::unique_ptr<Object> {
+//		return std::make_unique<Player>(loc, images.getSpriteObject(TypeObject::player));
+//	});
 
-bool Player::m_registerit = Factory::registerIt('p',
+bool Player::m_registerIt = Factory::registerIt(CHAR::PLAYER,
 	[](const ObjectConfig& objectConfig) -> std::unique_ptr<Object> {
-		return std::make_unique<Player>(objectConfig.location, objectConfig.images.getSpritePlayer(objectConfig.playerType) /*images.getSpritePlayer(type)*/);
+		return std::make_unique<Player>(objectConfig.location, objectConfig.images.getSpritePlayer(objectConfig.playerType));
 	});
 
 void Player::startJump()
@@ -22,9 +24,17 @@ void Player::startJump()
 	m_isFalling = false; // reset falling state.
 }
 
+void Player::setJumping(bool flag)
+{
+	m_jumping = flag; // set the jumping state
+}
+
 void Player::move(float deltaTime)
 {
 	Object::moveByView(deltaTime); // move the player by the view's position
+
+	// If the player gets stuck in a wall, we will know how to leave him in his position.
+	m_firstLoc = m_location;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
@@ -54,43 +64,69 @@ void Player::moveUpToDirection(float deltaTime)
 {
 	if (!m_isFalling)
 	{
-		m_nextLoc += DIRECTION::UP * (JUMP::SPEED * deltaTime);
+		m_nextLoc += DIRECTION::UP * (MOVE::JUMP_SPEED * deltaTime);
 	}
 	else
 	{
-		m_nextLoc += DIRECTION::DOWN * (JUMP::SPEED * deltaTime);
+		m_nextLoc += DIRECTION::DOWN * (MOVE::JUMP_SPEED * deltaTime);
 	}
 }
 
 void Player::updateModeDirection()
 {
-	if (!m_isFalling && m_location.y <= m_firstLocBeforeJump.y - JUMP::MAX_HEIGHT)
+	if (!m_isFalling && m_location.y <= m_firstLocBeforeJump.y - MOVE::MAX_JUMP)
 	{
 		m_isFalling = true; // הגיע לשיא – מתחיל ליפול
 	}
 }
 
-void Player::handleCollision(Object& other)
+void Player::handleCollision(MovingObject& other)
 {
-	other.checkCollision(*this); // = if the other object collides with this player object.	
+	// Handle collision with another moving object
+	other.handleCollision(*this); // Call the other object's collision handler
+}
+
+void Player::handleCollision(StaticObject& other)
+{
+	other.handleCollision(*this); // Delegate collision handling to the static object
+}
+
+void Player::handleCollision(Enemy& enemy)
+{
+	std::cout << "Player collided with Enemy. Player is Dead" << std::endl;
+	m_need2dead = true; // Set the player need to dead
+	// need to finished.
 }
 
 
-//
-//void Player::handleCollision(Enemy&)
-//{
-//	// if the player collides with an enemy, we can handle it here.
-//	std::cout << "Player collided with an enemy." << std::endl;
-//	m_dead = true; // Set the player as dead on collision with an enemy.
-//	if (m_jumping) // If the player is jumping, we can reset the jump state.
-//	{
-//		m_jumping = false;
-//		m_isFalling = false;
-//		m_location = m_firstLocBeforeJump; // Reset to the initial position before jump.
-//	}
-//
-//	// set information about the player death + money...
-//}
+void Player::updateInformation(ObjectInformation& info)
+{
+	// if the player is dead or not in view, set the player dead state
+	info.setPlayerDead(m_need2dead || !m_isInView);
+	m_need2dead = false;
+	m_isInView = true; 
+}
+
+sf::Sprite Player::getSprite() const
+{
+	return m_sprite;
+}
+
+void Player::setLocationY(float y)
+{
+	m_location.y = y; // Set the player's Y location
+}
+
+void Player::blockMovement()
+{
+	m_location.x = m_firstLoc.x - COLLISION::VERY_NEAR; // Block movement by resetting to the first location
+	m_location.y = m_firstLoc.y; // Reset Y position to the first location
+}
+
+void Player::setFalling(bool flag)
+{
+	m_isFalling = flag;
+}
 
 //void Player::startJump()
 //{

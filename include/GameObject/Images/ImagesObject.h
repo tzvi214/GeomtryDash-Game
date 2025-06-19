@@ -1,10 +1,17 @@
-﻿#pragma once
+#pragma once
+#include <SFML/Graphics.hpp>
+#include "GameObject/Images/TypeObject.h"
+#include "vector"
+
+
+#pragma once
 #include <SFML/Graphics.hpp>
 #include "GameObject/Images/TypeObject.h"
 
 
 class ImagesObject {
 public:
+    ImagesObject();
     static void loadAllImagesObject();
 
     static sf::Sprite getSpriteObject(const TypeObject& type);
