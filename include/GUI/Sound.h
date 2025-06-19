@@ -2,37 +2,30 @@
 
 #include <SFML/Audio.hpp>
 #include <map>
-#include <vector>
+#include <string>
 
-enum class SoundType
+enum class SoundType// sourt sound
 {
     HitObstacle,
     Jump,
-    Explosion,
+    Explosion
 };
 
-enum class MusicType
+enum class MusicType// long sound 
 {
     MainMenu,
-    InGame
+    InGame,
+    GameSound
 };
 
 class Sound
 {
 public:
-
-   static sf::Sound getSound(SoundType type);
-   static sf::Music& getMusic(MusicType type);
+    
+    static sf::Music& getMusic(MusicType type);
 
 private:
-    static bool loadSoundBuffer(SoundType type, const std::string& filename);
-    static bool loadMusic(MusicType type, const std::string& filename);
-
-    static  std::map<SoundType, sf::SoundBuffer> m_soundBuffers;
-    static  std::map<MusicType, std::string> m_musicFiles;
-    static  sf::Music m_musicPlayer;
-    static  MusicType m_currentMusicType = MusicType::MainMenu;
-
-    static  bool m_initialized = false;
-
+    static bool m_loaded;
+    static bool initialize();
+    static std::map<MusicType, const sf::Music&> m_music;
 };
