@@ -32,9 +32,8 @@ private:
 	void handleCollisionController();
 	void updateInformation();
 
-	//void clearAllVec(); //m_movingObjVec.clear(); m_staticObjVec.clear();
 	void updateAfterLevel();
-
+	void playLoopMusic();
 	void readFromFile();
 	//--- data member ----
 	std::vector <std::unique_ptr<MovingObject>> m_movingObjVec;

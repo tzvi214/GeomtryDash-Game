@@ -2,6 +2,9 @@
 
 std::vector<sf::Texture> ImageMenu::m_pictures;
 
+bool ImageMenu::m_loaded = [] {  ImageMenu::loadAllTextures(); return true; }();
+
+
 void ImageMenu::loadAllTextures()
 {
 	m_pictures.resize(static_cast<int>(GameObjectType::count));
@@ -15,7 +18,6 @@ void ImageMenu::loadAllTextures()
 
 	loadDone();
 	loadCancel();
-	//loadplayerOne();
 }
 
 sf::Sprite ImageMenu::getSpinte(const GameObjectType& type, const sf::Vector2f& wantedSize)

@@ -8,6 +8,7 @@
 #include "GameMenu/MenuAction.h"
 #include "GameData.h"
 #include <chrono>
+#include "GUI/Sound.h"
 
 
 GameController::GameController()
@@ -104,6 +105,7 @@ void GameController::handleMenu()
 	{
 
 		analyzeLevel();
+		playLoopMusic();
 		mainLoop();
 
 	}
@@ -171,7 +173,20 @@ void GameController::updateAfterLevel()
 	m_staticObjVec.clear();
 }
 
+
+
 void GameController::readFromFile()
 {
 
+}
+
+void GameController::playLoopMusic()
+{
+	auto& music = Sound::getMusic(MusicType::GameSound);
+
+		music.setLoop(true);        
+		music.setVolume(100.f);     
+		music.play();               
+	
+	
 }

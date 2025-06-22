@@ -1,9 +1,8 @@
 #include "GUI/Sound.h"
+#include <stdexcept>
 
-//sf::Music& Sound::getMusic(MusicType type)
-//{
-//    
-//}
+sf::Music Sound::m_gameSound;
+bool Sound::m_loaded = [] { return Sound::initialize(); }();
 
 bool Sound::initialize()
 {
@@ -11,20 +10,21 @@ bool Sound::initialize()
 
     if (m_initialized)
         return false;
-
-    /*if (!loadSoundBuffer(SoundType::HitObstacle, "audio/hit_obstacle.wav")) 
-        return false;
-    if (!loadSoundBuffer(SoundType::Jump, "audio/jump.wav"))    
-        return false;
-    if (!loadSoundBuffer(SoundType::Explosion, "audio/explosion.wav"))  
-        return false;*/
-
- /*   m_musicFiles[MusicType::MainMenu] = "audio/main_menu_music.ogg";
-    m_musicFiles[MusicType::InGame] = "audio/in_game_music.ogg";*/
-   // m_musicFiles[MusicType::GameSound] = "GameSound.mp3";
-   
+    if (!m_gameSound.openFromFile("GameSound1.mp3"))
+    {
+        throw std::runtime_error("Failed to load GameSound.mp3");
+    }
+    
     m_initialized = true;
     return true;
 }
-bool Sound::m_loaded = [] { return Sound::initialize(); }();
 
+sf::Music& Sound::getMusic(MusicType type)
+{
+    if (type == MusicType::GameSound) {
+        
+		return m_gameSound;
+    }
+    throw std::runtime_error("Failed to found music type ");
+
+}

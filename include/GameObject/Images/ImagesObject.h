@@ -11,13 +11,15 @@
 
 class ImagesObject {
 public:
-    ImagesObject();
-    static void loadAllImagesObject();
 
     static sf::Sprite getSpriteObject(const TypeObject& type);
     static sf::Sprite getSpritePlayer(const TypeObject& type);
 
 private:
+    static void loadAllImagesObject();
+
+    static bool m_loaded;
+
     static std::vector<sf::Texture> m_imagesObject;
 
     static void loadImageSpriteSheet();

@@ -5,11 +5,14 @@
 
 class ImageMenu {
 public:
-    static void loadAllTextures();
 
     static sf::Sprite getSpinte(const GameObjectType& type, const sf::Vector2f& wantedSize);
 
 private:
+    static void loadAllTextures();
+
+    static bool m_loaded;
+
     static std::vector<sf::Texture> m_pictures;
 
     static void loadStart();

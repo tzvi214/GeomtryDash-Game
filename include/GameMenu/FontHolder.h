@@ -5,10 +5,13 @@
 class FontHolder {
 
 public:
-	static void loadFont();
 	static sf::Text getText();
 
 private:
+	static void loadFont();
+
+	static bool m_loaded;
+
 	static sf::Font m_font;
 
 };

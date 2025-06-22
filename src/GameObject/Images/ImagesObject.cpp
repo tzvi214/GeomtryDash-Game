@@ -110,13 +110,11 @@
 #include "GameObject/Images/ImagesObject.h"
 
 std::vector<sf::Texture> ImagesObject::m_imagesObject;
+bool ImagesObject::m_loaded = [] {  ImagesObject::loadAllImagesObject(); return true; }();
 
 
 
-ImagesObject::ImagesObject()
-{
-	loadAllImagesObject();
-}
+
 
 void ImagesObject::loadAllImagesObject()
 {
@@ -150,7 +148,6 @@ void ImagesObject::loadPlayerCharacters()
 
 sf::Sprite ImagesObject::getSpriteObject(const TypeObject& type)
 {
-    loadAllImagesObject();
 
     sf::Sprite sprite;
     sprite.setTexture(m_imagesObject[static_cast<int>(TypeObject::SpriteSheet)]);
@@ -197,7 +194,6 @@ sf::Sprite ImagesObject::getSpriteObject(const TypeObject& type)
 
 sf::Sprite ImagesObject::getSpritePlayer(const TypeObject& type)
 {
-    loadAllImagesObject();
     sf::Sprite sprite;
     sprite.setTexture(m_imagesObject[static_cast<int>(TypeObject::PlayerCharacters)]);
 

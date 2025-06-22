@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-enum class SoundType// sourt sound
+enum class SoundType// sort sound
 {
     HitObstacle,
     Jump,
@@ -27,5 +27,7 @@ public:
 private:
     static bool m_loaded;
     static bool initialize();
-    static std::map<MusicType, const sf::Music&> m_music;
+  //  static std::map<MusicType,  sf::Music> m_music;
+    static sf::Music m_gameSound;
+
 };

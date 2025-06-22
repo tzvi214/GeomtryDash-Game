@@ -2,6 +2,8 @@
 
 sf::Font FontHolder::m_font;
 
+bool FontHolder::m_loaded = [] {  FontHolder::loadFont(); return true; }();
+
 void FontHolder::loadFont()
 {
 	if (!m_font.loadFromFile("Athelas.ttc"))
