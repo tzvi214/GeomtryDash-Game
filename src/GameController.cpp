@@ -66,7 +66,8 @@ void GameController::handleEvent()
 		MovObj->move(deltaTime);
 
 	auto view = m_window.getView();
-	view.move(sf::Vector2f{ deltaTime * 150, 0.f });
+	view.move(sf::Vector2f{ deltaTime * 150, 0.f });// need to chinged it to  view.move(sf::Vector2f{ deltaTime * MOVE::SPEED, 0.f });
+	
 	m_window.setView(view);
 
 }
@@ -120,8 +121,6 @@ void GameController::analyzeLevel()
 {
 	ImagesObject images;
 
-
-
 	std::fstream file("level" + std::to_string(m_information.getNumLevel()) + ".txt");
 	if (!file.is_open())
 	{
@@ -129,22 +128,16 @@ void GameController::analyzeLevel()
 		return;
 	}
 
-	// Add logic to read from the file here...
 	char c;
 	int row = 0, col = 0;
 	int counter = 0;
 	while (file >> std::noskipws >> c) {
-	//	std::cout << counter++ << ' '<< (char)c;
+	
 		sf::Vector2f loc{ static_cast<float>(col) * 50.f, static_cast<float>(row) * 50.f};
 		ObjectConfig objectConfig{loc, images,m_menuInfo.getTypePlayer() };
 
-		//auto obj = Factory::create(c, objectConfig);
-		auto start = std::chrono::high_resolution_clock::now();
 		auto obj = Factory::create(c, objectConfig);
-		auto end = std::chrono::high_resolution_clock::now();
-		std::cout << "Time: " << std::chrono::duration<double, std::milli>(end - start).count() << " ms\n";
-
-
+		
 		if (auto mo = dynamic_cast<MovingObject*>(obj.get()))
 			m_movingObjVec.push_back(std::unique_ptr<MovingObject>(static_cast<MovingObject*>(obj.release())));
 		else if (auto so = dynamic_cast<StaticObject*>(obj.get()))
@@ -159,8 +152,6 @@ void GameController::analyzeLevel()
 	  
 	file.close();
 
-
-	
 }
 //-------------------------------------
 void GameController::updateInformation()
@@ -173,8 +164,6 @@ void GameController::updateAfterLevel()
 	m_staticObjVec.clear();
 }
 
-
-
 void GameController::readFromFile()
 {
 
@@ -185,8 +174,6 @@ void GameController::playLoopMusic()
 	auto& music = Sound::getMusic(MusicType::GameSound);
 
 		music.setLoop(true);        
-		music.setVolume(100.f);     
+		music.setVolume(0.f);     
 		music.play();               
-	
-	
 }
