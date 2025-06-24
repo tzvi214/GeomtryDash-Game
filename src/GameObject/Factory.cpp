@@ -45,6 +45,5 @@ std::unique_ptr<Object> Factory::create(char symbol, const ObjectConfig& objectC
     auto it = getMap().find(symbol);
     if (it != getMap().end())
         return it->second(objectConfig);
-
     return nullptr;
 }

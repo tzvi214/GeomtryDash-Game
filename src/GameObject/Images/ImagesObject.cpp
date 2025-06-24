@@ -6,7 +6,7 @@ bool ImagesObject::m_loaded = [] {  ImagesObject::loadAllImagesObject(); return 
 
 void ImagesObject::loadAllImagesObject()
 {
-   
+
     static bool loaded = false;
     if (loaded)
         return;
@@ -60,17 +60,17 @@ sf::Sprite ImagesObject::getSpriteObject(const TypeObject& type)
         sprite.setTextureRect(sf::IntRect(490, 660, 32, 32));
         break;
 
-	case TypeObject::Platform:
-		sprite.setTextureRect(sf::IntRect(682, 513, 50, 50));
-		break;
+    case TypeObject::Platform:
+        sprite.setTextureRect(sf::IntRect(682, 513, 50, 50));
+        break;
 
-	case TypeObject::ExitDoor:
-		sprite.setTextureRect(sf::IntRect(40, 836, 80, 80));
-		break;
+    case TypeObject::ExitDoor:
+        sprite.setTextureRect(sf::IntRect(40, 836, 80, 80));
+        break;
 
-	case TypeObject::Gift:
-		sprite.setTextureRect(sf::IntRect(879, 173, 50, 50));
-		break;
+    case TypeObject::Gift:
+        sprite.setTextureRect(sf::IntRect(879, 173, 50, 50));
+        break;
 
     default:
         return sf::Sprite();

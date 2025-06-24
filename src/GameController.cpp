@@ -58,8 +58,8 @@ void GameController::handleEvent()
 {
 	deleteObjFromVec();
 	// maybe move is separate function and update direction is a separate function
-	for (const auto& MovObj : m_movingObjVec)
-		MovObj->updateDirection();
+	/*for (const auto& MovObj : m_movingObjVec)
+		MovObj->updateDirection();*/
 
 	auto deltaTime = m_clock.restart().asSeconds();
 	for (const auto& MovObj : m_movingObjVec)
@@ -75,7 +75,7 @@ void GameController::handleEvent()
 void GameController::deleteObjFromVec()
 {
 	std::erase_if(m_movingObjVec, [](const auto& obj) { return obj->isDead(); });
-	//std::erase_if(m_staticObjVec, [](const auto& obj) { return obj->isDead(); });// maybe in i will be able to shot static object and to kill them
+	std::erase_if(m_staticObjVec, [](const auto& obj) { return obj->isDead(); });// maybe in i will be able to shot static object and to kill them
 }
 //-------------------------------------
 void GameController::draw()
@@ -93,7 +93,20 @@ void GameController::draw()
 //-------------------------------------
 void GameController::handleCollisionController()
 {
+	for (auto& movingObj : m_movingObjVec)
+	{
+		for (auto& staticObj : m_staticObjVec)
+		{
+			if (movingObj->collidesWith(*staticObj))
+				movingObj->handleCollision(*staticObj);
+		}
 
+		for (auto& otherMovingObj : m_movingObjVec)
+		{
+			if (movingObj->collidesWith(*otherMovingObj) && movingObj->checkCollision(*otherMovingObj))
+				movingObj->handleCollision(*otherMovingObj);
+		}
+	}
 
 }
 //-------------------------------------
