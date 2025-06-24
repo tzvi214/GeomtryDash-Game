@@ -113,7 +113,6 @@ void GameController::handleMenu()
 	else if (action == MenuAction::ExitGame)
 	{
 		m_need2exit = true;
-		//m_window.close();
 	}
 }
 //-------------------------------------
