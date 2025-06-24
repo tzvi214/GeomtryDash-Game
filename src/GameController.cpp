@@ -171,9 +171,5 @@ void GameController::readFromFile()
 
 void GameController::playLoopMusic()
 {
-	auto& music = Sound::getMusic(MusicType::GameSound);
-
-		music.setLoop(true);        
-		music.setVolume(0.f);     
-		music.play();               
+	Sound::playMusic(MusicType::GameSound);
 }

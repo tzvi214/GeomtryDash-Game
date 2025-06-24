@@ -25,4 +25,5 @@ private:
 	
 	void drawMenu(sf::RenderWindow& window);
 	MenuAction clickManager(sf::RenderWindow& window, Info& info);
+	void playMusic();
 };

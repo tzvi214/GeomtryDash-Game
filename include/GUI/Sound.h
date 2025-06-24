@@ -13,8 +13,7 @@ enum class SoundType// sort sound
 
 enum class MusicType// long sound 
 {
-    MainMenu,
-    InGame,
+    MenuSound,
     GameSound
 };
 
@@ -22,12 +21,12 @@ class Sound
 {
 public:
     
-    static sf::Music& getMusic(MusicType type);
-
+    static void playMusic(MusicType type, float valume = 75.f);
 private:
+    static void playMusic(sf::Music&, float);
     static bool m_loaded;
     static bool initialize();
-  //  static std::map<MusicType,  sf::Music> m_music;
-    static sf::Music m_gameSound;
+    static std::map<MusicType, sf::Music> m_musicMap;
+    static void closeAllMusic();
 
 };
