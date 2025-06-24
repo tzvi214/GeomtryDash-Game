@@ -4,10 +4,6 @@
 
 Player::Player(sf::Vector2f location, sf::Sprite sprite): MovingObject(location, sprite) {}
 
-//bool Player::m_registerIt = Factory::registerIt(CHAR::PLAYER,
-//	[](sf::Vector2f loc, const ImagesObject& images) -> std::unique_ptr<Object> {
-//		return std::make_unique<Player>(loc, images.getSpriteObject(TypeObject::player));
-//	});
 
 bool Player::m_registerIt = Factory::registerIt(CHAR::PLAYER,
 	[](const ObjectConfig& objectConfig) -> std::unique_ptr<Object> {
@@ -42,6 +38,7 @@ void Player::handleCollision(Enemy& enemy)
 {
 	std::cout << "Player collided with Enemy. Player is Dead" << std::endl;
 	m_need2dead = true; // Set the player need to dead
+	//m_dead = true;
 	// need to finished.
 }
 

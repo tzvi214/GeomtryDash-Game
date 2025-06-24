@@ -5,6 +5,7 @@ class Move
 {
 public:
 	Move() = default;
+	
 	void update(float deltaTime, sf::Vector2f& posObj);
 	void startJump();
 	void setOnGround(bool onGround);

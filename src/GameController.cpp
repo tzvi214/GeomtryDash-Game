@@ -57,10 +57,6 @@ void GameController::mainLoop()
 void GameController::handleEvent()
 {
 	deleteObjFromVec();
-	// maybe move is separate function and update direction is a separate function
-	/*for (const auto& MovObj : m_movingObjVec)
-		MovObj->updateDirection();*/
-
 	auto deltaTime = m_clock.restart().asSeconds();
 	for (const auto& MovObj : m_movingObjVec)
 		MovObj->move(deltaTime);
@@ -87,7 +83,8 @@ void GameController::draw()
 	for (const auto& movingObj : m_movingObjVec)
 		movingObj->draw(m_window);
 
-	m_information.draw(m_window);
+	//m_information.draw(m_window);
+
 	m_window.display();
 }
 //-------------------------------------
@@ -133,10 +130,10 @@ void GameController::analyzeLevel()
 {
 	ImagesObject images;
 
-	std::fstream file("level" + std::to_string(m_information.getNumLevel()) + ".txt");
+	std::fstream file("level" + std::to_string(m_menuInfo.getNumLevel()) + ".txt");
 	if (!file.is_open())
 	{
-		std::cerr << "Error: Failed to open file: Level" << m_information.getNumLevel() << ".txt" << std::endl;
+		std::cerr << "Error: Failed to open file: Level" << m_menuInfo.getNumLevel() << ".txt" << std::endl;
 		return;
 	}
 
@@ -168,6 +165,16 @@ void GameController::analyzeLevel()
 //-------------------------------------
 void GameController::updateInformation()
 {
+	for (auto& movingObj : m_movingObjVec)
+	{
+			movingObj->updateInformation(m_objectInformation);
+	}
+
+	for (auto& staticObj : m_staticObjVec)
+	{
+		staticObj->updateInformation(m_objectInformation);
+	}
+
 }
 //-------------------------------------
 void GameController::updateAfterLevel()
