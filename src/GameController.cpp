@@ -46,9 +46,11 @@ void GameController::mainLoop()
 				return;
 			}
 		}
-		handleEvent();
-		handleCollisionController();
 		updateInformation();
+
+		handleEvent();
+
+		handleCollisionController();
 		draw();
 
 		if (m_objectInformation.isNextLevel())

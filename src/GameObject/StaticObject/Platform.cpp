@@ -7,6 +7,11 @@ Platform::Platform(sf::Vector2f location, sf::Sprite sprite)
     : StaticObject(location, sprite) {
 }
 
+//bool Platform::m_registerIt = Factory::registerIt(CHAR::PLATFORM,
+//    [](sf::Vector2f loc, const ImagesObject& images) -> std::unique_ptr<Object> {
+//        return std::make_unique<Platform>(loc, images.getSpriteObject(TypeObject::Platform));
+//    });
+
 bool Platform::m_registerIt = Factory::registerIt(CHAR::PLATFORM,
     [](const ObjectConfig& objectConfig) -> std::unique_ptr<Object> {
         return std::make_unique<Platform>(objectConfig.location, objectConfig.images.getSpriteObject(TypeObject::Platform));
@@ -27,7 +32,6 @@ void Platform::handleCollision(Player& movObj)
 
     if (playerBottom <= platformTop + COLLISION::NEAR) 	// Hit from above.
     {
-        std::cout << "Player on platform" << std::endl;
         movObj.setOnGround(true); //MOVE
         movObj.setLocationY(platformTop - playerBounds.height);  // update loc.
     }
