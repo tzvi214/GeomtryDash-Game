@@ -48,7 +48,15 @@ void GameController::mainLoop()
 		}
 		handleEvent();
 		handleCollisionController();
+		updateInformation();
 		draw();
+
+		if (m_objectInformation.isNextLevel())
+		{
+
+			m_objectInformation.setNextLevel(false);
+			return;
+		}
 
 	}
 }
@@ -82,9 +90,10 @@ void GameController::draw()
 	for (const auto& movingObj : m_movingObjVec)
 		movingObj->draw(m_window);
 
-	//m_information.draw(m_window);
+	m_objectInformation.draw(m_window, m_numLevel);
 
 	m_window.display();
+
 }
 //-------------------------------------
 void GameController::handleCollisionController()
@@ -180,10 +189,11 @@ void GameController::updateInformation()
 //-------------------------------------
 void GameController::updateAfterLevel()
 {
+	
+	m_numLevel++;
+	m_menuInfo.getMoney(m_objectInformation.moveCoins());
 	m_movingObjVec.clear();
 	m_staticObjVec.clear();
-	m_numLevel++;
-	m_menuInfo.getMoney();
 }
 
 void GameController::readFromFile()

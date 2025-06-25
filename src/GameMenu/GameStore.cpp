@@ -55,6 +55,7 @@ void GameStore::runStore(Info& info, sf::RenderWindow& window)
 		m_backgroundStore.draw(window);
 		drawStore(window);
 		clickManager(info, window);
+		info.draw(window);
 		window.display();
 	}
 }

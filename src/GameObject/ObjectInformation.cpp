@@ -1,16 +1,12 @@
-#include "Info.h"
-#include <iostream>
+#include "GameObject/ObjectInformation.h"  
 #include "GameMenu/FontHolder.h"  
 
 
-Info::Info() :m_numLevel {1}
-{}
+void ObjectInformation::draw(sf::RenderWindow& window, int level) const{
 
-void Info::draw(sf::RenderWindow& window)
-{
     auto text = FontHolder::getText();
 
-    text.setString("Money: " + std::to_string(m_money) );
+    text.setString("Level: " + std::to_string(level) + "    Coins: " + std::to_string(m_coins));
 
     text.setFillColor(sf::Color::Black);
 
@@ -25,21 +21,3 @@ void Info::draw(sf::RenderWindow& window)
     text.setPosition(pos);
     window.draw(text);
 }
-
-bool Info::buyPlayer(TypeObject type)
-{
-	m_typePlayer = type;
-	return true;
-
-}
-
-bool Info::buyPlayer(TypeObject type, int price)
-{
-	if (m_money >= price) {
-		m_typePlayer = type;
-		m_money -= price;
-		return true;
-	}
-	return false;
-}
-
