@@ -9,6 +9,7 @@ public:
 	void draw(sf::RenderWindow&);
 
 	//-- set function --
+	void getMoney(int money) { m_money += money; }
 	void setNumLevel(int level) { m_numLevel = level; }
 	//void setTypePlayer(TypeObject type) { m_typePlayer = type; }
 

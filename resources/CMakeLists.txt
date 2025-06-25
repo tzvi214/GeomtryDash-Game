@@ -15,6 +15,9 @@ configure_file ("Avatar.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("bg.png" ${CMAKE_BINARY_DIR} COPYONLY)
 
 configure_file ("level1.txt" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("level2.txt" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("level3.txt" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("level4.txt" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("GameSound.mp3" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("MenuSound.mp3" ${CMAKE_BINARY_DIR} COPYONLY)
 

@@ -46,4 +46,6 @@ private:
 	sf::Clock m_clock;
 	Info m_menuInfo;
 	Background m_background;
+	int m_numLevel = 1;
+
 };

@@ -28,7 +28,6 @@ void GameController::run()
 			m_window.setView(sf::View(sf::FloatRect(0.f, 0.f, GameData::SIZE_GAME_WINDOW.x, GameData::SIZE_GAME_WINDOW.y)));
 
 			handleMenu();
-			updateAfterLevel();	
 	}
 
 }
@@ -118,6 +117,8 @@ void GameController::handleMenu()
 		analyzeLevel();
 		playLoopMusic();
 		mainLoop();
+		updateAfterLevel();
+
 
 	}
 	else if (action == MenuAction::ExitGame)
@@ -130,7 +131,7 @@ void GameController::analyzeLevel()
 {
 	ImagesObject images;
 
-	std::fstream file("level" + std::to_string(m_menuInfo.getNumLevel()) + ".txt");
+	std::fstream file("level" + std::to_string(m_numLevel) + ".txt");
 	if (!file.is_open())
 	{
 		std::cerr << "Error: Failed to open file: Level" << m_menuInfo.getNumLevel() << ".txt" << std::endl;
@@ -181,6 +182,8 @@ void GameController::updateAfterLevel()
 {
 	m_movingObjVec.clear();
 	m_staticObjVec.clear();
+	m_numLevel++;
+	m_menuInfo.getMoney();
 }
 
 void GameController::readFromFile()
