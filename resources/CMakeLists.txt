@@ -18,6 +18,13 @@ configure_file ("level1.txt" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("GameSound.mp3" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("MenuSound.mp3" ${CMAKE_BINARY_DIR} COPYONLY)
 
+configure_file ("unlock.wav" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("touchGift.wav" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("notification.wav" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("gameOver.wav" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("finishedLevel.wav" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("click.mp3" ${CMAKE_BINARY_DIR} COPYONLY)
+
 
 
 
