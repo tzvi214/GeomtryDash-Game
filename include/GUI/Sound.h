@@ -24,7 +24,7 @@ class Sound
 {
 public:
     
-    static void playMusic(MusicType type, float valume = 0.f);
+    static void playMusic(MusicType type, float valume = 75.f);
     static void playSound(SoundType type, float volume = 75.f);
 private:
     static bool m_loaded;

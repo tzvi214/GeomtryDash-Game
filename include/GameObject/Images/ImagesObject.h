@@ -4,16 +4,12 @@
 #include "vector"
 
 
-#pragma once
-#include <SFML/Graphics.hpp>
-#include "GameObject/Images/TypeObject.h"
-
-
 class ImagesObject {
 public:
 
     static sf::Sprite getSpriteObject(const TypeObject& type);
     static sf::Sprite getSpritePlayer(const TypeObject& type);
+    static sf::Sprite getSpritLock(const sf::Vector2f& wantedSize);
 
 private:
     static void loadAllImagesObject();
@@ -24,5 +20,6 @@ private:
 
     static void loadImageSpriteSheet();
     static void loadPlayerCharacters();
+    static void loadLock();
 
 };

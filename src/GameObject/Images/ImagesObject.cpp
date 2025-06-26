@@ -14,6 +14,7 @@ void ImagesObject::loadAllImagesObject()
     m_imagesObject.resize(static_cast<int>(TypeObject::count));
     loadImageSpriteSheet();
     loadPlayerCharacters();
+    loadLock();
 
     loaded = true;
 }
@@ -30,6 +31,12 @@ void ImagesObject::loadPlayerCharacters()
 {
     if (!m_imagesObject[static_cast<int>(TypeObject::PlayerCharacters)].loadFromFile("PlayerCharacters.png"))
         std::cout << "Error: \n    Failed to load Player Characters image (file not found).";
+}
+
+void ImagesObject::loadLock()
+{
+    if (!m_imagesObject[static_cast<int>(TypeObject::lock)].loadFromFile("Lock.png"))
+        std::cout << "Error: \n    Failed to load Lock image (file not found).";
 }
 
 
@@ -127,6 +134,24 @@ sf::Sprite ImagesObject::getSpritePlayer(const TypeObject& type)
     default:
         return sf::Sprite();
     }
+
+    return sprite;
+}
+
+
+sf::Sprite ImagesObject::getSpritLock(const sf::Vector2f& wantedSize)
+{
+    sf::Sprite sprite;
+    sprite.setTexture(m_imagesObject[static_cast<int>(TypeObject::lock)]);
+
+    sf::Texture& texture = m_imagesObject[static_cast<int>(TypeObject::lock)];
+    sf::Vector2u texSize = texture.getSize();
+
+    float scaleX = wantedSize.x / texSize.x;
+    float scaleY = wantedSize.y / texSize.y;
+
+    sprite.setScale(scaleX, scaleY);
+    sprite.setColor(sf::Color(255, 255, 255, 191)); //  75%
 
     return sprite;
 }

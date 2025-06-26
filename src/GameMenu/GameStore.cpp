@@ -50,12 +50,12 @@ void GameStore::runStore(Info& info, sf::RenderWindow& window)
 {
 	m_runStore = true;
 
-	while (m_runStore) { 
+	while (m_runStore) {
 		window.clear();
 		m_backgroundStore.draw(window);
 		drawStore(window);
-		clickManager(info, window);
 		info.draw(window);
+		clickManager(info, window);
 		window.display();
 	}
 }
@@ -68,6 +68,7 @@ void GameStore::clickManager(Info& info, sf::RenderWindow& window)
 	sf::Vector2f mousePos;
 	MenuAction action = MenuAction::None;
 
+
 	while (window.pollEvent(event)) {
 		if (event.type == sf::Event::MouseButtonPressed) {
 			mousePos = window.mapPixelToCoords(
@@ -77,7 +78,8 @@ void GameStore::clickManager(Info& info, sf::RenderWindow& window)
 				if (m_character[i].first->isPressed(mousePos)) {
 					//to chack if i alrody buy this character
 					action = m_character[i].first->handleClick(info, window);
-					m_character[i].second = true; // but player
+					if(action != MenuAction::None)
+						m_character[i].second = true; // but player
 				}
 			}
 
@@ -87,7 +89,7 @@ void GameStore::clickManager(Info& info, sf::RenderWindow& window)
 			}
 		}
 
-		if(action == MenuAction::Done || action == MenuAction::Cancel)
+		if (action == MenuAction::Done || action == MenuAction::Cancel)
 			m_runStore = false;
 	}
 }
@@ -95,9 +97,19 @@ void GameStore::clickManager(Info& info, sf::RenderWindow& window)
 
 void GameStore::drawStore(sf::RenderWindow& window)
 {
-	for (int i = 0; i < m_character.size(); i++)
+	for (int i = 0; i < m_character.size(); i++) {
 		m_character[i].first->draw(window);
 
+		// if not buy mark lock
+		if (!m_character[i].second) {
+			auto* character = dynamic_cast<CharactersButton*>(m_character[i].first.get());
+			if (character) {
+				character->drawCost(window);
+				character->drawLock(window);
+			}
+		}
+
+	}
 
 	for (int i = 0; i < m_buttonStore.size(); i++)
 		m_buttonStore[i]->draw(window);

@@ -7,5 +7,6 @@ enum class MenuAction {
     OpenStore,
     ShowHelp,
     Done,
-    Cancel
+    Cancel,
+    BuySucceed
 };

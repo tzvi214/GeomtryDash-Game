@@ -1,6 +1,5 @@
 ﻿#include "GameMenu/MenuManager.h"
-#include "GUI/Sound.h"
-
+#include"GUI/Sound.h"
 MenuManager::MenuManager()
 	:m_backgroundMenu("Background.png")
 {
@@ -16,7 +15,7 @@ MenuManager::MenuManager()
 
 MenuAction MenuManager::runMenu(Info& info, sf::RenderWindow& window)
 {
-	playMusic();
+	Sound::playMusic(MusicType::MenuSound);
 	while (true) {
 		window.clear();
 		m_backgroundMenu.draw(window);
@@ -48,11 +47,7 @@ MenuAction MenuManager::clickManager(sf::RenderWindow& window, Info& info)
 	return MenuAction::None;
 }
 
-void MenuManager::playMusic()
-{
-	Sound::playMusic(MusicType::MenuSound);
 
-}
 
 void MenuManager::drawMenu(sf::RenderWindow& window)
 {

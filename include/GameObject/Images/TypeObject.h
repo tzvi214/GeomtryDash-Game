@@ -18,6 +18,6 @@ enum class TypeObject {
 	PlayerDelta,
 	PlayerEpsilon,
 	PlayerZeta,
-
+	lock,
 	count
 };

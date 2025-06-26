@@ -26,16 +26,13 @@ void Info::draw(sf::RenderWindow& window)
     window.draw(text);
 }
 
-bool Info::buyPlayer(TypeObject type)
-{
-	m_typePlayer = type;
-	return true;
 
-}
 
 bool Info::buyPlayer(TypeObject type, int price)
 {
+
 	if (m_money >= price) {
+
 		m_typePlayer = type;
 		m_money -= price;
 		return true;
