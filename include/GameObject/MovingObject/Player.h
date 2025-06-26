@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject/MovingObject/MovingObject.h"
 #include "GameObject/Images/ImagesObject.h"
+#include "GUI/Sound.h"
+
 
 
 class Player : public MovingObject
@@ -22,7 +24,7 @@ public:
 	// information for Controller.
 	virtual void updateInformation(ObjectInformation&) override;
 
-	void setNeed2Dead() { m_need2dead = true; }
+	void setNeed2Dead() { m_need2dead = true; Sound::playSound(SoundType::gameOver); }
 
 private:
 

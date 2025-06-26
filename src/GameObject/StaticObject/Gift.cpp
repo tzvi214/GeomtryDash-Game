@@ -1,16 +1,11 @@
 #include "GameObject/StaticObject/Gift.h"
-#include "GameObject/Factory.h" // for Factory class
+#include "GameObject/Factory.h" 
+#include "GUI/Sound.h"
 
 Gift::Gift(sf::Vector2f location, sf::Sprite sprite)
 	: StaticObject(location, sprite) {
 }
 
-
-//bool Gift::m_registerIt = Factory::registerIt(CHAR::GIFT,/*Lambda*/
-//	[](sf::Vector2f location, const ImagesObject& images) -> std::unique_ptr<Object>
-//	{
-//		return std::make_unique<Gift>(location, images.getSpriteObject(TypeObject::Gift));
-//	});
 
 bool Gift::m_registerIt = Factory::registerIt(CHAR::GIFT,
 	[](const ObjectConfig& objectConfig) -> std::unique_ptr<Object> {
@@ -21,6 +16,7 @@ void Gift::handleCollision(Player& player)
 {
 	m_addCoin = true;
 	m_dead = true; // delete this Coin from vector
+	Sound::playSound(SoundType::touchGift);
 }
 
 void Gift::updateInformation(ObjectInformation& info)

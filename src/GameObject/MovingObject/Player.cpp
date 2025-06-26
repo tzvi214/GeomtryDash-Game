@@ -17,14 +17,11 @@ void Player::draw(sf::RenderWindow& window)
 		window.draw(m_sprite);
 
 		if (m_need2dead)
-			returnToSafeLoc(window); // !
+			returnToSafeLoc(window); 
 	}
 	else
 	{
-		// Solution: The player himself returns the camera to the position.
-		// even though it goes against the principles of oop !
-		returnToSafeLoc(window);
-		
+		returnToSafeLoc(window);	
 	}
 }
 
@@ -80,7 +77,6 @@ void Player::setSafeLocation()
 		m_safeLoc.x = m_location.x - MOVE::SAVE_X;
 		m_safeLoc.y = m_location.y;
 		m_safeLocClock.restart();
-		std::cout << "SAFELOCATION " << std::endl;
 	}
 }
 
@@ -99,12 +95,11 @@ void Player::setView(sf::RenderWindow& window)
 	sf::View view = window.getView();
 	float viewWidth = view.getSize().x;
 
-	// תשאיר את Y כפי שהיה קודם
 	sf::Vector2f currentCenter = view.getCenter();
 
 	sf::Vector2f newCenter;
 	newCenter.x = m_location.x + (viewWidth * (0.5f - MOVE::playerViewOffsetX));
-	newCenter.y = currentCenter.y; // לא להזיז את Y
+	newCenter.y = currentCenter.y; 
 
 	view.setCenter(newCenter);
 	window.setView(view);

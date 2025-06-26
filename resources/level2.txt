@@ -1,13 +1,14 @@
-######  ##### ######
-XXXXXXXXXXXXXXXXXXXX
-
-                    
-    ### 
-
-               @    
-                    
-
-       XXXXXXXXXXXXXXXXXXXX             
-                    
-    p               
- ######  ###########
+                                                                                                                                                        
+                                                                                                                                                        
+              G         ###                            G       ###               @                ###              G         ###                    
+        ###                  ###            G     ###                  ###          ###      G            ###          @     ###              
+                                                                                                                                                        
+XXXXXXXXXXXXXXXXXXX     XXXXXX       XXXXXX     X                X          XX   XX     XX    X               XX    X    X    XXX     XX   @ XX    XXX    XXXXXXX     XXXXXXXXXXXXXXXXXXXXXX         @   #
+                                                                                                                                                                  XXXXXXXXXXXXXXXXXXXXXX             @   #
+               GGGGG XGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG GGGGGGGGGGGGGGGGGGGGGGGG GGGGGGGGGGGGGGGGG GGGGGGGGGGGGGGGGGGGG GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG                                                                                                                                      D    XXXXXXXXXXXXXXXXXXXXXX                       @   #
+     G             @               G         G                        G       G              G        X          G         G             G          D                                                 @   #
+           ###          ###              ###      ###       ###           ###        ###             ###         ###         ###                    D                                                 @   #
+                        ##########        ###########        ########        ##########        ###########        ########                       @X  D                                                 @   #
+ p     G     G     G     G     G     G     G     G     G     G     G     G     G     G     G     G     G     G     G     G     G     GX   G       X  D                                                 @   #
+############   ############   ############   ############   ############   ############   ############  @ ############   ############ X############ D                                                 @   #
+                          XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXXX XXXXXXXXXXX                                                                                                                                                                          @   #
