@@ -1,7 +1,7 @@
 #include "Info.h"
 #include <iostream>
 #include "GameMenu/FontHolder.h"  
-
+#include "GUI/Sound.h"
 
 Info::Info() :m_numLevel {1}
 {}
@@ -35,8 +35,11 @@ bool Info::buyPlayer(TypeObject type, int price)
 
 		m_typePlayer = type;
 		m_money -= price;
+        Sound::playSound(SoundType::unlock);
 		return true;
 	}
+    Sound::playSound(SoundType::notification);
+
 	return false;
 }
 

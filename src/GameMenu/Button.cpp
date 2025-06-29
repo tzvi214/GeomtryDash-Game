@@ -1,4 +1,5 @@
 ﻿#include "GameMenu/Button.h"
+#include "GUI/Sound.h"
 
 Button::Button(const sf::Vector2f& location)
 	:m_location(location)
@@ -6,7 +7,12 @@ Button::Button(const sf::Vector2f& location)
 
 bool Button::isPressed(const sf::Vector2f& mousePos) const
 {
-	return m_sprite.getGlobalBounds().contains(mousePos);
+
+	if (m_sprite.getGlobalBounds().contains(mousePos)) {
+		Sound::playSound(SoundType::click);
+		return true;
+	}
+	return  false;
 }
 
 void Button::draw(sf::RenderWindow& window)

@@ -22,6 +22,6 @@ public:
 private:
 	int m_numLevel;
 	TypeObject m_typePlayer = TypeObject::player;
-	int m_money = 100; // money of the player
+	int m_money = 0; // money of the player
 
 };
