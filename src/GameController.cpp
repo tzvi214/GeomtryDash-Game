@@ -23,11 +23,11 @@ void GameController::run()
 	
 	while (!m_need2exit) {
 
-			m_window.setView(sf::View(sf::FloatRect(0.f, 0.f, GameData::SIZE_GAME_WINDOW.x, GameData::SIZE_GAME_WINDOW.y)));
-			m_menuManager.runMenu(m_menuInfo, m_window);
-			m_window.setView(sf::View(sf::FloatRect(0.f, 0.f, GameData::SIZE_GAME_WINDOW.x, GameData::SIZE_GAME_WINDOW.y)));
+		m_window.setView(sf::View(sf::FloatRect(0.f, 0.f, GameData::SIZE_GAME_WINDOW.x, GameData::SIZE_GAME_WINDOW.y)));
+		m_menuManager.runMenu(m_menuInfo, m_window);
+		m_window.setView(sf::View(sf::FloatRect(0.f, 0.f, GameData::SIZE_GAME_WINDOW.x, GameData::SIZE_GAME_WINDOW.y)));
 
-			handleMenu();
+		handleMenu();
 	}
 
 }
@@ -155,7 +155,6 @@ void GameController::analyzeLevel()
 		ObjectConfig objectConfig{loc, images,m_menuInfo.getTypePlayer() };
 
 		auto obj = Factory::create(c, objectConfig);
-		
 		if (auto mo = dynamic_cast<MovingObject*>(obj.get()))
 			m_movingObjVec.push_back(std::unique_ptr<MovingObject>(static_cast<MovingObject*>(obj.release())));
 		else if (auto so = dynamic_cast<StaticObject*>(obj.get()))

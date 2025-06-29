@@ -29,11 +29,11 @@ namespace ButtonData {
     const sf::Vector2f LOC_PAYER_ZETA = { 500.f, 490.f }; // מיקום דמות שחקן 6 בחנות
 
 
-    const int COST_PLAYER_ALPHA = 50;   // שחקן ראשון
-    const int COST_PLAYER_BETA = 100;  // שחקן שני
-    const int COST_PLAYER_GAMMA = 150;  // שחקן שלישי
-    const int COST_PLAYER_DELTA = 200;  // שחקן רביעי
-    const int COST_PLAYER_EPSILON = 250; // שחקן חמישי
-    const int COST_PLAYER_ZETA = 300;  // שחקן שישי
+    constexpr int COST_PLAYER_ALPHA = 50;   // שחקן ראשון
+    constexpr int COST_PLAYER_BETA = 100;  // שחקן שני
+    constexpr int COST_PLAYER_GAMMA = 150;  // שחקן שלישי
+    constexpr int COST_PLAYER_DELTA = 200;  // שחקן רביעי
+    constexpr int COST_PLAYER_EPSILON = 250; // שחקן חמישי
+    constexpr int COST_PLAYER_ZETA = 300;  // שחקן שישי
 
 }
