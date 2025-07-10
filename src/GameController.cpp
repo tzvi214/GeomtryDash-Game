@@ -151,7 +151,7 @@ void GameController::analyzeLevel()
 	int counter = 0;
 	while (file >> std::noskipws >> c) {
 	
-		sf::Vector2f loc{ static_cast<float>(col) * 50.f, static_cast<float>(row) * 50.f};
+		sf::Vector2f loc{ static_cast<float>(col) * 50.f, static_cast<float>(row) * 50.f};// 50.f is the size of object
 		ObjectConfig objectConfig{loc, images,m_menuInfo.getTypePlayer() };
 
 		auto obj = Factory::create(c, objectConfig);
