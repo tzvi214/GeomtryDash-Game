@@ -10,6 +10,7 @@ bool Player::m_registerIt = Factory::registerIt(CHAR::PLAYER,
 	});
 
 void Player::draw(sf::RenderWindow& window)
+
 {
 	if (objInView(window) && !m_need2dead) // Check if the object is in view before drawing
 	{
