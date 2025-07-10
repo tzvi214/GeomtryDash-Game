@@ -31,6 +31,7 @@ private:
 	bool m_need2dead = false;
 	 sf::Vector2f m_safeLoc;
 	 sf::Clock m_safeLocClock;
+	 sf::Vector2f m_startLoc;
 	 void returnToSafeLoc(sf::RenderWindow&);
 	 void setSafeLocation();
 	 void setView(sf::RenderWindow&);

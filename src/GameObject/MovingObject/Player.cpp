@@ -2,7 +2,7 @@
 #include "GameObject/StaticObject/StaticObject.h"
 #include "GameObject/Factory.h" // for Factory class
 
-Player::Player(sf::Vector2f location, sf::Sprite sprite): MovingObject(location, sprite), m_safeLoc(location) {}
+Player::Player(sf::Vector2f location, sf::Sprite sprite): MovingObject(location, sprite), m_safeLoc(location),m_startLoc(location) {}
 
 bool Player::m_registerIt = Factory::registerIt(CHAR::PLAYER,
 	[](const ObjectConfig& objectConfig) -> std::unique_ptr<Object> {
@@ -83,7 +83,8 @@ void Player::setSafeLocation()
 void Player::returnToSafeLoc(sf::RenderWindow& window)
 {
 	m_move.resetVelocityY();
-	m_location = m_safeLoc;
+    //m_location = m_safeLoc; // reset up-to safeLocation.
+	m_location = m_startLoc; // reset up-to start Location.
 	setView(window);
 	m_need2dead = false;
 }
